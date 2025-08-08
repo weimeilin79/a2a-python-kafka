@@ -44,6 +44,7 @@
 
 Install the core SDK and any desired extras using your preferred package manager.
 
+<<<<<<< HEAD
 | Feature                  | `uv` Command                               | `pip` Command                                |
 | ------------------------ | ------------------------------------------ | -------------------------------------------- |
 | **Core SDK**             | `uv add a2a-sdk`                           | `pip install a2a-sdk`                        |
@@ -58,6 +59,99 @@ Install the core SDK and any desired extras using your preferred package manager
 | **MySQL**                | `uv add "a2a-sdk[mysql]"`                  | `pip install "a2a-sdk[mysql]"`               |
 | **SQLite**               | `uv add "a2a-sdk[sqlite]"`                 | `pip install "a2a-sdk[sqlite]"`              |
 | **All SQL Drivers**      | `uv add "a2a-sdk[sql]"`                    | `pip install "a2a-sdk[sql]"`                 |
+=======
+```bash
+uv add a2a-sdk
+```
+
+To include the optional HTTP server components (FastAPI, Starlette), install the `http-server` extra:
+
+```bash
+uv add a2a-sdk[http-server]
+```
+
+To install with gRPC support:
+
+```bash
+uv add "a2a-sdk[grpc]"
+```
+
+To install with Kafka transport support:
+
+```bash
+uv add "a2a-sdk[kafka]"
+```
+
+To install with OpenTelemetry tracing support:
+
+```bash
+uv add "a2a-sdk[telemetry]"
+```
+
+To install with database support:
+
+```bash
+# PostgreSQL support
+uv add "a2a-sdk[postgresql]"
+
+# MySQL support
+uv add "a2a-sdk[mysql]"
+
+# SQLite support
+uv add "a2a-sdk[sqlite]"
+
+# All database drivers
+uv add "a2a-sdk[sql]"
+```
+
+### Using `pip`
+
+If you prefer to use pip, the standard Python package installer, you can install `a2a-sdk` as follows
+
+```bash
+pip install a2a-sdk
+```
+
+To include the optional HTTP server components (FastAPI, Starlette), install the `http-server` extra:
+
+```bash
+pip install a2a-sdk[http-server]
+```
+
+To install with gRPC support:
+
+```bash
+pip install "a2a-sdk[grpc]"
+```
+
+To install with Kafka transport support:
+
+```bash
+pip install "a2a-sdk[kafka]"
+```
+
+To install with OpenTelemetry tracing support:
+
+```bash
+pip install "a2a-sdk[telemetry]"
+```
+
+To install with database support:
+
+```bash
+# PostgreSQL support
+pip install "a2a-sdk[postgresql]"
+
+# MySQL support
+pip install "a2a-sdk[mysql]"
+
+# SQLite support
+pip install "a2a-sdk[sqlite]"
+
+# All database drivers
+pip install "a2a-sdk[sql]"
+```
+>>>>>>> af776e6 (kafka)
 
 ## Examples
 
