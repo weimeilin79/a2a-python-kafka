@@ -264,8 +264,9 @@ class KafkaClientTransport(ClientTransport):
 
         if context:
             # Add context headers if needed
-            if context.trace_id:
-                headers.append(('trace_id', context.trace_id.encode('utf-8')))
+            trace_id = context.state.get("kafka_trace_id")
+            if trace_id:
+                headers.append(('trace_id', trace_id.encode('utf-8')))
 
         try:
             await self.producer.send_and_wait(
@@ -292,8 +293,10 @@ class KafkaClientTransport(ClientTransport):
         try:
             # Wait for response with timeout
             timeout = 30.0  # Default timeout
-            if context and context.timeout:
-                timeout = context.timeout
+            if context:
+                client_timeout = context.state.get("kafka_timeout")
+                if client_timeout is not None:
+                    timeout = client_timeout
                 
             result = await asyncio.wait_for(future, timeout=timeout)
             return result
@@ -318,8 +321,10 @@ class KafkaClientTransport(ClientTransport):
         
         try:
             timeout = 30.0
-            if context and context.timeout:
-                timeout = context.timeout
+            if context:
+                client_timeout = context.state.get("kafka_timeout")
+                if client_timeout is not None:
+                    timeout = client_timeout
             
             # Yield responses as they arrive
             while not streaming_future.is_done():
@@ -353,8 +358,10 @@ class KafkaClientTransport(ClientTransport):
         
         try:
             timeout = 30.0
-            if context and context.timeout:
-                timeout = context.timeout
+            if context:
+                client_timeout = context.state.get("kafka_timeout")
+                if client_timeout is not None:
+                    timeout = client_timeout
                 
             result = await asyncio.wait_for(future, timeout=timeout)
             if not isinstance(result, Task):
@@ -379,8 +386,10 @@ class KafkaClientTransport(ClientTransport):
         
         try:
             timeout = 30.0
-            if context and context.timeout:
-                timeout = context.timeout
+            if context:
+                client_timeout = context.state.get("kafka_timeout")
+                if client_timeout is not None:
+                    timeout = client_timeout
                 
             result = await asyncio.wait_for(future, timeout=timeout)
             if not isinstance(result, Task):
@@ -405,8 +414,10 @@ class KafkaClientTransport(ClientTransport):
         
         try:
             timeout = 30.0
-            if context and context.timeout:
-                timeout = context.timeout
+            if context:
+                client_timeout = context.state.get("kafka_timeout")
+                if client_timeout is not None:
+                    timeout = client_timeout
                 
             result = await asyncio.wait_for(future, timeout=timeout)
             if result is None or isinstance(result, TaskPushNotificationConfig):
@@ -431,8 +442,10 @@ class KafkaClientTransport(ClientTransport):
         
         try:
             timeout = 30.0
-            if context and context.timeout:
-                timeout = context.timeout
+            if context:
+                client_timeout = context.state.get("kafka_timeout")
+                if client_timeout is not None:
+                    timeout = client_timeout
                 
             result = await asyncio.wait_for(future, timeout=timeout)
             if isinstance(result, list):
@@ -457,8 +470,10 @@ class KafkaClientTransport(ClientTransport):
         
         try:
             timeout = 30.0
-            if context and context.timeout:
-                timeout = context.timeout
+            if context:
+                client_timeout = context.state.get("kafka_timeout")
+                if client_timeout is not None:
+                    timeout = client_timeout
                 
             await asyncio.wait_for(future, timeout=timeout)
         except asyncio.TimeoutError:
